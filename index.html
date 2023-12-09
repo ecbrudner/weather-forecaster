@@ -11,23 +11,26 @@
         <h1>Weather Dashboard</h1>
     </header>
 
-    <div id="search-bar">
+    <div id="search-bar" class="city-search">
         <h2>Search for a City:</h2>
-            <input type="text" placeholder="San Diego">
-            <button type="search">Search</button>
+        <input id="search-text" type="text" placeholder="San Diego">
+        <button id="search-button">Search</button>
     </div>
 
-    <div id="weather-info">
-
-    </div>
+    <div id="weather-info"></div>
 
     <div id="5-day-forecast">
         <h3>5-Day Forecast:</h3>
+        <div id="forecast-cards">
+            <div id="day-1"></div>
+            <div id="day-2"></div>
+            <div id="day-3"></div>
+            <div id="day-4"></div>
+            <div id="day-5"></div>
+        </div>
     </div>
 
-    <div id="saved-cities">
-
-    </div>
+    <div id="saved-cities"></div>
 
     <script src="./script.js"></script>
 </body>

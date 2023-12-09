@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #4D1FD5;
+    color: white;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.city-search {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.city-search input{
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 18px;
+    outline: none;
+}
+
+.city-search button{
+    height: 30px;
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 18px;
+    outline: none;
+    margin-left: 10px;
+    cursor: pointer;
+}
