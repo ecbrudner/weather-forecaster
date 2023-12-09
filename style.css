@@ -18,6 +18,12 @@ header {
     margin-left: 10px;
 }
 
+.search-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .city-search input{
     height: 30px;
     border-radius: 5px;
@@ -34,4 +40,5 @@ header {
     outline: none;
     margin-left: 10px;
     cursor: pointer;
+    background-color: lightblue;
 }
