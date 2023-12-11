@@ -23,7 +23,25 @@ function getWeather(){
         console.log(lon);
         console.log(lat);
         console.log(cityName);
-        // searchResultEl.innerHTML= cityName;
+
+        var searchedCity= {
+            cityName: cityName,
+            lon: lon,
+            lat: lat
+        };
+        
+        //save searched city to local storage
+        localStorage.setItem("searchedCity", JSON.stringify(searchedCity));
+        //create button for searched city
+        var savedCityButton= document.createElement("button");
+        savedCityButton.innerHTML= cityName;
+        savedCityButton.setAttribute("class", "saved-city-button");
+
+        //append button to savedSearchesEl
+        savedSearchesEl.appendChild(savedCityButton);
+
+        //when button is clicked, run getWeather function
+        savedCityButton.addEventListener("click", getWeather);
 
         //use lon and lat to get weather data
         var getWeatherDataUrl= "http://api.openweathermap.org/data/2.5/forecast?lat="+ lat +"&lon="+ lon +"&appid=b95e856ef0726d8cf81fd93906d37be3";
@@ -35,6 +53,11 @@ function getWeather(){
             })
             .then (function(data){
                 console.log(data);
+
+                //clear searchResultEl and weekForecastEl
+                searchResultEl.innerHTML= "";
+                weekForecastEl.innerHTML= "";
+                
                 // assign all weather data to variables for today
                 var todayDate= data.list[0].dt_txt;
                 var todayIconUrl= "http://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
@@ -43,6 +66,7 @@ function getWeather(){
                 var todayWind= data.list[0].wind.speed;
                 var todayHumidity= data.list[0].main.humidity+ "%";
                 var weatherData= document.createElement("div");
+
 
                 //append today's temp, wind, humdity to searchResultEl
                 searchResultEl.innerHTML= cityName + " " + todayDate;
