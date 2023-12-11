@@ -2,8 +2,20 @@ var searchResultEl= document.getElementById("weather-info");
 var savedSearchesEl= document.getElementById("saved-cities");
 var weekForecastEl= document.getElementById("5-day-forecast");
 var searchButtonEl= document.getElementById("search-button");
+var searchTextEl= document.getElementById("search-text");
 
 searchButtonEl.addEventListener("click", getWeather);
+
+//check if city already in local storage
+function cityButtonExists(cityName){
+    var existingButtons= document.getElementsByClassName("saved-city-button");
+    for (var i=0; i<existingButtons.length; i++){
+        if (existingButtons[i].innerHTML===cityName){
+            return true;
+        }
+    } 
+    return false;
+}
 
 function getWeather(){
     //run user input through API to get lon and lat of city
@@ -32,19 +44,27 @@ function getWeather(){
         
         //save searched city to local storage
         localStorage.setItem("searchedCity", JSON.stringify(searchedCity));
-        //create button for searched city
-        var savedCityButton= document.createElement("button");
-        savedCityButton.innerHTML= cityName;
-        savedCityButton.setAttribute("class", "saved-city-button");
 
-        //append button to savedSearchesEl
-        savedSearchesEl.appendChild(savedCityButton);
+        //check if button with same city name already exists
+        if (!cityButtonExists(cityName)){
+        
+            //create button for searched city
+            var savedCityButton= document.createElement("button");
+            savedCityButton.innerHTML= cityName;
+            savedCityButton.setAttribute("class", "saved-city-button");
 
-        //when button is clicked, run getWeather function
-        savedCityButton.addEventListener("click", getWeather);
+            //append button to savedSearchesEl
+            savedSearchesEl.appendChild(savedCityButton);
+
+            //when button is clicked, run getWeather function
+            savedCityButton.addEventListener("click", function(){
+                searchTextEl.value= cityName;
+                getWeather();
+            });
+        }
 
         //use lon and lat to get weather data
-        var getWeatherDataUrl= "http://api.openweathermap.org/data/2.5/forecast?lat="+ lat +"&lon="+ lon +"&appid=b95e856ef0726d8cf81fd93906d37be3";
+        var getWeatherDataUrl= "http://api.openweathermap.org/data/2.5/forecast?lat="+ lat +"&lon="+ lon +"&appid=b95e856ef0726d8cf81fd93906d37be3&units=imperial";
         console.log(getWeatherDataUrl);
 
             fetch(getWeatherDataUrl)
@@ -62,8 +82,8 @@ function getWeather(){
                 var todayDate= data.list[0].dt_txt;
                 var todayIconUrl= "http://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
                 var todayIcon= document.createElement("img");
-                var todayTemp= data.list[0].main.temp;
-                var todayWind= data.list[0].wind.speed;
+                var todayTemp= data.list[0].main.temp+"°F";
+                var todayWind= data.list[0].wind.speed+" MPH";
                 var todayHumidity= data.list[0].main.humidity+ "%";
                 var weatherData= document.createElement("div");
 
@@ -76,13 +96,13 @@ function getWeather(){
                 searchResultEl.appendChild(weatherData);
 
                 //append 5 day forecast to weekForecastEl
-                for (var i=8; i<40; i+=8){
+                for (var i=7; i<40; i+=8){
                     var dayForecast= document.createElement("div");
                     var dayDate= data.list[i].dt_txt;
                     var dayIconUrl= "http://openweathermap.org/img/w/"+data.list[i].weather[0].icon+".png";
                     var dayIcon= document.createElement("img");
-                    var dayTemp= data.list[i].main.temp;
-                    var dayWind= data.list[i].wind.speed;
+                    var dayTemp= data.list[i].main.temp+"°F";
+                    var dayWind= data.list[i].wind.speed+" MPH";
                     var dayHumidity= data.list[i].main.humidity+ "%";
                     dayForecast.innerHTML= dayDate;
                     dayIcon.setAttribute("src", dayIconUrl);
