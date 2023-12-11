@@ -1,6 +1,6 @@
 var searchResultEl= document.getElementById("weather-info");
 var savedSearchesEl= document.getElementById("saved-cities");
-var weekForecastEl= document.getElementById("5-day-forecast");
+var weekForecastEl= document.getElementById("forecast");
 var searchButtonEl= document.getElementById("search-button");
 var searchTextEl= document.getElementById("search-text");
 
@@ -15,6 +15,13 @@ function cityButtonExists(cityName){
         }
     } 
     return false;
+}
+
+//function to reformat date
+function formatDate(dateString) {
+    var date = new Date(dateString);
+    var options = { month: '2-digit', day: '2-digit', year: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
 }
 
 function getWeather(){
@@ -79,7 +86,7 @@ function getWeather(){
                 weekForecastEl.innerHTML= "";
                 
                 // assign all weather data to variables for today
-                var todayDate= data.list[0].dt_txt;
+                var todayDate= formatDate(data.list[0].dt_txt);
                 var todayIconUrl= "http://openweathermap.org/img/w/"+data.list[0].weather[0].icon+".png";
                 var todayIcon= document.createElement("img");
                 var todayTemp= data.list[0].main.temp+"°F";
@@ -96,9 +103,9 @@ function getWeather(){
                 searchResultEl.appendChild(weatherData);
 
                 //append 5 day forecast to weekForecastEl
-                for (var i=7; i<40; i+=8){
+                for (var i=4; i<40; i+=8){
                     var dayForecast= document.createElement("div");
-                    var dayDate= data.list[i].dt_txt;
+                    var dayDate= formatDate(data.list[i].dt_txt);
                     var dayIconUrl= "http://openweathermap.org/img/w/"+data.list[i].weather[0].icon+".png";
                     var dayIcon= document.createElement("img");
                     var dayTemp= data.list[i].main.temp+"°F";
