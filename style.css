@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 header {
     background-color: #4D1FD5;
     color: white;
@@ -11,6 +15,19 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container-1{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.container-2{
+    display: flex;
+    flex-direction: column;
 }
 
 .city-search {
@@ -32,6 +49,8 @@ header {
     padding: 0 10px;
     font-size: 18px;
     outline: none;
+    width: 250px;
+    margin-top: 10px;
 }
 
 .city-search button{
@@ -40,13 +59,16 @@ header {
     padding: 0 10px;
     font-size: 18px;
     outline: none;
-    margin-top: 10px;
     cursor: pointer;
-    background-color: lightblue;
+    background-color: #4D1FD5;
+    color: white;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+    margin-top:10px;
 }
 
 .city-search button:hover{
-    background-color: #4D1FD5;
+    background-color: #280D78;
     color: white;
 }
 
@@ -54,19 +76,34 @@ header {
     border: 2px solid #4D1FD5;
 }
 
+#saved-cities {
+    display: flex;
+    flex-direction: column; 
+}
+
+#saved-cities button{
+    background-color: whitesmoke;
+    color: #280D78;
+    border: 1px solid #280D78;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin:5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    max-width: 100px;
+}
+
 #weather-info {
-    border: 2px solid #4D1FD5;
+    border: 1px solid #280D78;
     margin-top: 20px;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-#weather-info h2 {
-    font-size: 24px;
-    font-weight: bold;
+    background-color: #f8f8f8;
+    border-radius: 8px;
 }
 
 #forecast {
@@ -80,7 +117,7 @@ header {
     color: white;
     padding: 10px;
     margin: 20px;
-    width: calc(20%-20px);
     text-align: center;
     box-sizing: border-box;
+    width: calc(20% - 20px);
 }

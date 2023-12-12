@@ -99,8 +99,10 @@ function getWeather(){
                 searchResultEl.innerHTML= cityName + " " + todayDate;
                 todayIcon.setAttribute("src", todayIconUrl);
                 searchResultEl.appendChild(todayIcon);
-                weatherData.innerHTML= "Temp: "+ todayTemp + " Wind: " + todayWind + " Humidity: " + todayHumidity;
+                weatherData.innerHTML= "Temp: " + todayTemp +" "+ "Wind: "+todayWind + " " +"Humidity: " + todayHumidity;
                 searchResultEl.appendChild(weatherData);
+
+                weekForecastEl.innerHTML= '<h2>5-Day Forecast:</h2>'
 
                 //append 5 day forecast to weekForecastEl
                 for (var i=4; i<40; i+=8){
